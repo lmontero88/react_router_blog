@@ -1,57 +1,43 @@
 import React from 'react';
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import AcercaDe from './components/AcercaDe';
+import Blog from './components/Blog';
+import Header from './components/Header';
+import Inicio from './components/Inicio';
+import styled from 'styled-components';
+import Post from './components/Post';
+import Error from './components/Error';
 
 function App() {
   return (
     <BrowserRouter>
-      <div>
-        <header>
-          <h1>
-            Mi blog personal
-         </h1>
-          <nav>
-            <Link to="/">Inicio</Link>
-            <Link to="/blog">Blog</Link>
-            <Link to="/acerca_mi">Acerca de </Link>
-          </nav>
-        </header>
-        <main>
-          <Switch> 
-            <Route path='/' exact={true}>
-              <div>
-                <h2>
-                  Pagina de Inicio
-          </h2>
-                <p> Esta es la pagina principal</p>
-              </div>
-            </Route>
-            <Route path='/blog'>
-              <div>
-                <h2>
-                  BLog
-              </h2>
-                <ul>
-                  <li>Articulo 1 </li>
-                  <li>Articulo 2</li>
-                  <li>Articulo 3</li>
-                </ul>
-              </div>
-            </Route>
-            <Route path='/acerca_mi'>
-              <div>
-                <h2>
-                  Acerca de
-          </h2>
-                <p> Este soy yo</p>
-              </div>
-            </Route>
+      <ContenedorPrincipal>
+        <Header/>
+        <Main>
+          <Switch>
+            <Route path='/' exact={true} component={Inicio}/>
+            <Route path='/blog'component={Blog}/>
+            <Route path='/post/:id'component={Post}/>
+            <Route path='/acerca_mi' component={AcercaDe}/>
+            <Route component={Error}/>
           </Switch>
-        </main>
-      </div>
+        </Main>
+      </ContenedorPrincipal>
     </BrowserRouter>
 
 
   );
 }
 
+const ContenedorPrincipal = styled.div`
+    padding: 40px;
+    width:90%;
+    max-width:700px;
+`;
+const Main = styled.main`
+    background: #fff;
+    padding: 40px;
+    border-radius:10px;
+    box-shadow: 0px 0px 5px rgba(129, 129, 129, 0.1);
+`;
 export default App;
